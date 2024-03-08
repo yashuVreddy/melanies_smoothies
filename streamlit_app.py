@@ -15,6 +15,9 @@ st.write("""Choose the fruits you want in your custom smoothie""")
 
 cnx = st.connection("snowflake")
 session = cnx.session()
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response)
 my_dataframe = session.table("smoothies.public.fruit_options").select(col("Fruit_Name"))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 ingredients_list =st.multiselect('Choose up to 5 ingredients:',my_dataframe)
